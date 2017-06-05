@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu2pod-1-i4uml
+  generateName: cpu2pod-1-
+  namespace: cpuintensive2
+  selfLink: /api/v1/namespaces/cpuintensive2/pods/cpu2pod-1-i4uml
+  uid: 3b265efe-405a-11e7-b76c-525400c583ad
+  resourceVersion: '82928'
+  creationTimestamp: '2017-05-24T08:23:14Z'
+  labels:
+    app: cpu2pod
+    deployment: cpu2pod-1
+    deploymentconfig: cpu2pod
+  annotations:
+    kubernetes.io/created-by: "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"cpuintensive2\",\"name\":\"cpu2pod-1\",\"uid\":\"e676f957-4059-11e7-b76c-525400c583ad\",\"apiVersion\":\"v1\",\"resourceVersion\":\"32842\"}}\n"
+    openshift.io/deployment-config.latest-version: '1'
+    openshift.io/deployment-config.name: cpu2pod
+    openshift.io/deployment.name: cpu2pod-1
+    openshift.io/scc: anyuid
+spec:
+  volumes:
+    -
+      name: default-token-hodph
+      secret:
+        secretName: default-token-hodph
+  containers:
+    -
+      name: cpu2pod
+      image: '172.30.53.244:5000/cpuintensive2/cpu2pod@sha256:87007b5790e71d98aede80ab29bf011de5a34550fa988c0db78d48aea997ee54'
+      ports:
+        -
+          containerPort: 8080
+          protocol: TCP
+      resources:
+      volumeMounts:
+        -
+          name: default-token-hodph
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePath: /dev/termination-log
+      imagePullPolicy: Always
+      securityContext:
+        capabilities:
+          drop:
+            - MKNOD
+            - SYS_CHROOT
+        privileged: false
+        seLinuxOptions:
+          level: 's0:c7,c4'
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  host: origin
+  serviceAccountName: default
+  serviceAccount: default
+  nodeName: origin
+  securityContext:
+    seLinuxOptions:
+      level: 's0:c7,c4'
+  imagePullSecrets:
+    -
+      name: default-dockercfg-uhquv
+status:
+  phase: Running
+  conditions:
+    -
+      type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2017-05-24T08:23:17Z'
+    -
+      type: Ready
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2017-06-05T16:52:07Z'
+    -
+      type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2017-05-24T08:23:14Z'
+  hostIP: 10.0.2.15
+  podIP: 172.17.0.3
+  startTime: '2017-05-24T08:23:17Z'
+  containerStatuses:
+    -
+      name: cpu2pod
+      state:
+        running:
+          startedAt: '2017-06-05T16:51:58Z'
+      lastState:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2017-06-05T16:48:15Z'
+          finishedAt: '2017-06-05T16:49:07Z'
+          containerID: 'docker://26b34b7f396a212f836b729f1a15d208dc88b5ea536a6e4fcee80d5e227bfc50'
+      ready: true
+      restartCount: 105
+      image: '172.30.53.244:5000/cpuintensive2/cpu2pod@sha256:87007b5790e71d98aede80ab29bf011de5a34550fa988c0db78d48aea997ee54'
+      imageID: 'docker://sha256:3301cbc0f654e0696acd0cb3942b6cb5479a19d00ae4128458d7f3b953b6c158'
+      containerID: 'docker://98c4e11f3e0dac6982889cd38bb8346cca96db95d788523ecf7f2269f7d8df31'
